@@ -10,7 +10,8 @@
             (.appName app-name)
             (.instanceId instance-id)
             (.unleashAPI api))]
-    (.build (reduce
+    (.build ^UnleashConfig$Builder
+            (reduce
               (fn
                 ([] bldr) 
                 ([bldr f]
