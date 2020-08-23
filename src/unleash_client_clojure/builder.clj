@@ -23,7 +23,7 @@
   (fn [^UnleashConfig$Builder bldr]
     (.customHttpHeader bldr header-name header-value)))
 
-(defn senf-metrics-interval [^Long interval-seconds]
+(defn send-metrics-interval [^Long interval-seconds]
   (fn [^UnleashConfig$Builder bldr]
     (.sendMetricsInterval bldr interval-seconds)))
 
