@@ -1,22 +1,15 @@
 # unleash-client-clojure
 
-A Clojure library designed to ... well, that part is up to you.
-
+A Clojure library wrapping [unleash java client](https://github.com/Unleash/unleash-client-java)
 ## Usage
 
-FIXME
+```clojure
+(require '[unleash-client-clojure.unleash :as u])
+;; a simple client
+(def unleash (u/build "app-name" "instance-id" "http://unleash.herokuapp.com/api/"))
+(u/enabled? unleash "Bit")
+;; more configuration can be passed by using the functions in the builder namespace
+(require '[unleash-client-clojure.builder :as b])
+(def unleash (u/build "app-name" "instance-id" "http://unleash.herokuapp.com/api/" (b/environment "staging") (b/fetch-toggles-interval 15)))
 
-## License
-
-Copyright © 2020 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+```
