@@ -4,8 +4,10 @@
            [no.finn.unleash.strategy Strategy]))
 
 (defprotocol IUnleash
-  (enabled? [this ^String toggle-name]
-            [this ^String toggle-name ^boolean default-setting]))
+  (enabled? 
+    [this ^String toggle-name]
+    [this ^String toggle-name ^boolean default-setting])
+  (get-feature-toggle-names [this]))
 
 (extend-protocol IUnleash
   DefaultUnleash
@@ -13,7 +15,9 @@
     ([this toggle-name]
      (.isEnabled this toggle-name))
     ([this toggle-name default-setting]
-     (.isEnabled this toggle-name default-setting))))
+     (.isEnabled this ^String toggle-name ^boolean default-setting)))
+  (get-feature-toggle-names [this]
+    (.getFeatureToggleNames this)))
 
 (defn build
   [app-name ^String instance-id ^String api & fs]
