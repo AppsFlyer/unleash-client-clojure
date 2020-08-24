@@ -55,4 +55,4 @@ A Clojure library wrapping [unleash java client](https://github.com/Unleash/unle
 ```
 
 #### TODO:
-- [] Integration testing
+- [ ] Integration testing
