@@ -1,30 +1,13 @@
-(ns unleash-client-clojure.unleash
-  (:require [unleash-client-clojure.builder :as builder]
-            [unleash-client-clojure.util]
-            [unleash_client_clojure.variant])
-  (:import [no.finn.unleash DefaultUnleash]
-           [no.finn.unleash.strategy Strategy]
+(ns unleash-client-clojure.fake
+  (:require [unleash-client-clojure.unleash :as u]
+            [unleash_client_clojure.util])
+  (:import [unleash_client_clojure.variant OptionalPayloadVariant]
+           [no.finn.unleash FakeUnleash]
            [no.finn.unleash UnleashContext Variant]
-           [java.util Optional]
-           [unleash_client_clojure.util BiFunctionWrapper]
-           [unleash_client_clojure.variant OptionalPayloadVariant]))
+           [unleash_client_clojure.util BiFunctionWrapper]))
 
-(defprotocol IUnleash
-  (enabled? 
-    [this ^String toggle-name]
-    [this ^String toggle-name fallback]
-    [this ^String toggle-name ^UnleashContext context fallback])
-  (get-variant
-    [this ^String toggle-name]
-    [this ^String toggle-name ^Variant default-variant])
-  (get-variant-with-context
-    [this ^String toggle-name ^UnleashContext context]
-    [this ^String toggle-name ^UnleashContext context ^Variant default-variant])
-  (get-toggle-definition [this toggle-name])
-  (get-feature-toggle-names [this]))
-
-(extend-protocol IUnleash
-  DefaultUnleash
+(extend-protocol u/IUnleash
+  FakeUnleash
   (enabled?
     ([this toggle-name]
      (.isEnabled this toggle-name))
@@ -47,13 +30,9 @@
     ([this toggle-name context default-variant]
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant))))
   (get-toggle-definition [this toggle-name]
-    (.orElse ^Optional (.getFeatureToggleDefinition this toggle-name)
-            nil))
+    (throw (UnsupportedOperationException.)))
   (get-feature-toggle-names [this]
     (vec (.getFeatureToggleNames this))))
 
-(defn build
-  [app-name ^String instance-id ^String api & fs]
-  (DefaultUnleash. (apply builder/build app-name instance-id api fs)
-                   (into-array Strategy [])))
+(defn build [] (FakeUnleash.))
 
