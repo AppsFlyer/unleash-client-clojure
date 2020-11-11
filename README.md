@@ -1,5 +1,7 @@
 # unleash-client-clojure
 
+[![Clojars Project](https://img.shields.io/clojars/v/unleash-client-clojure.svg)](https://clojars.org/unleash-client-clojure)
+
 A Clojure library wrapping [unleash java client](https://github.com/Unleash/unleash-client-java)
 ## Usage
 
