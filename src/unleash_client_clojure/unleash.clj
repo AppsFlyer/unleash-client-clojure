@@ -48,7 +48,7 @@
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant))))
   (get-toggle-definition [this toggle-name]
     (.orElse ^Optional (.getFeatureToggleDefinition this toggle-name)
-            nil))
+             nil))
   (get-feature-toggle-names [this]
     (vec (.getFeatureToggleNames this))))
 
