@@ -14,16 +14,16 @@
                     (c/add-property "bar" "baz"))] 
                    
       (is (= "app"
-             (.get (.getAppName context))))
+             (c/get-app-name context)))
       (is (= "env"
-             (.get (.getEnvironment context))))
+             (c/get-environment context)))
       (is (= "userId"
-             (.get (.getUserId context))))
+             (c/get-user-id context)))
       (is (= "42"
-             (.get (.getSessionId context))))
+             (c/get-session-id context)))
       (is (= "1.2.2.1"
-             (.get (.getRemoteAddress context))))
+             (c/get-remote-address context)))
       (is (= "bar"
-             (.get (.getByName context "foo"))))
+             (c/get-property context "foo")))
       (is (= "baz"
-             (.get (.getByName context "bar")))))))
+             (c/get-by-name context "bar"))))))

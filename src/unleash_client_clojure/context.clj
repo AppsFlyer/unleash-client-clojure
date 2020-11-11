@@ -1,17 +1,39 @@
 (ns unleash-client-clojure.context
-  (:import [no.finn.unleash UnleashContext UnleashContext$Builder]))
+  (:import [no.finn.unleash UnleashContext UnleashContext$Builder]
+           (java.util Optional)))
 
-(defn build ^UnleashContext 
+(defn build ^UnleashContext
   [& fs]
   (let [bldr (UnleashContext$Builder.)]
     (.build ^UnleashContext$Builder
             (reduce
               (fn
-                ([] bldr) 
+                ([] bldr)
                 ([bldr f]
                  (f bldr)))
               bldr
               fs))))
+
+(defn get-app-name [^UnleashContext ctx]
+  (.get (.getAppName ctx)))
+
+(defn get-environment [^UnleashContext ctx]
+  (.get (.getEnvironment ctx)))
+
+(defn get-user-id [^UnleashContext ctx]
+  (.get (.getUserId ctx)))
+
+(defn get-session-id [^UnleashContext ctx]
+  (.get (.getSessionId ctx)))
+
+(defn get-remote-address [^UnleashContext ctx]
+  (.get (.getRemoteAddress ctx)))
+
+(defn get-property [^UnleashContext ctx ^String property-name]
+  (.get (.getProperties ctx) property-name))
+
+(defn get-by-name [^UnleashContext ctx ^String contextName]
+  (.get (.getByName ctx contextName)))
 
 (defn app-name [^String app-name]
   (fn [^UnleashContext$Builder bldr]

@@ -8,7 +8,12 @@ A Clojure library wrapping [unleash java client](https://github.com/Unleash/unle
 (require '[unleash-client-clojure.unleash :as u])
 ;; a simple client
 (def unleash (u/build "app-name" "instance-id" "http://unleash.herokuapp.com/api/"))
+;; simple toggle
 (u/enabled? unleash "Bit")
+;; toggle with context
+(require '[unleash-client-clojure.context :as c])
+(def user-context (c/build (c/user-id "user-id")))
+(u/enabled? unleash "toggle-name" user-context false)
 ;; more configuration can be passed by using the functions in the builder namespace
 (require '[unleash-client-clojure.builder :as b])
 (def unleash (u/build "app-name" "instance-id" "http://unleash.herokuapp.com/api/" (b/environment "staging") (b/fetch-toggles-interval 15)))
@@ -55,4 +60,4 @@ A Clojure library wrapping [unleash java client](https://github.com/Unleash/unle
 ```
 
 #### TODO:
-- [] Integration testing
+- [ ] Integration testing
