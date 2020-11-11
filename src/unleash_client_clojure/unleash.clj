@@ -10,7 +10,7 @@
            [unleash_client_clojure.variant OptionalPayloadVariant]))
 
 (defprotocol IUnleash
-  (enabled? 
+  (enabled?
     [this ^String toggle-name]
     [this ^String toggle-name fallback]
     [this ^String toggle-name ^UnleashContext context fallback])
@@ -48,7 +48,7 @@
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant))))
   (get-toggle-definition [this toggle-name]
     (.orElse ^Optional (.getFeatureToggleDefinition this toggle-name)
-            nil))
+             nil))
   (get-feature-toggle-names [this]
     (vec (.getFeatureToggleNames this))))
 
@@ -57,3 +57,7 @@
   (DefaultUnleash. (apply builder/build app-name instance-id api fs)
                    (into-array Strategy [])))
 
+(defn build-with-custom-strategies
+  [app-name ^String instance-id ^String api strategies & fs]
+  (DefaultUnleash. (apply builder/build app-name instance-id api fs)
+                   (into-array Strategy strategies)))
