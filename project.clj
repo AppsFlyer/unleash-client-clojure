@@ -1,6 +1,6 @@
 (defproject unleash-client-clojure "0.1.1"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A Clojure library wrapping https://github.com/Unleash/unleash-client-java"
+  :url "https://github.com/AppsFlyer/unleash-client-clojure"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[no.finn.unleash/unleash-client-java "3.3.3"]]
