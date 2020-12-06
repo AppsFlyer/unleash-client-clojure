@@ -4,7 +4,12 @@ language: clojure
 lein: lein
 after_script:
   - bash -ex test/coveralls.sh
-script: lein do clean, javac, test
+jobs:
+  include:
+    - stage: lint
+      script: lein clj-kondo --lint src test --cache false
+    - stage: test
+      script: lein eftest
 notifications:
   recipients:
     - ido@appsflyer.com
