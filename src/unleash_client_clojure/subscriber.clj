@@ -28,12 +28,12 @@
     (client-metrics metrics))
   (^void clientRegistered [_ ^ClientRegistration registration]
     (client-registered registration))
-  (^void togglesBackedUp [_ ^ToggleCollection collection]
+  (^void togglesBackedUp [_ ^ToggleCollection _collection]
     (toggles-backed-up))
   (^void toggleBackupRestored [_ ^ToggleCollection collection]
     (toggle-backup-restored collection)))
                           
-(defn- no-op [_ _])
+(defn- no-op [_])
 
 (defn build [{:keys [on-error on-event on-ready toggle-evaluated
                      toggles-fetched client-metrics client-registered
