@@ -6,8 +6,6 @@ jdk:
     - openjdk11
     - openjdk13
     - openjdk15
-after_script:
-  - bash -ex test/coveralls.sh
 jobs: 
     include:
         - stage: lint
@@ -16,6 +14,7 @@ jobs:
           script: lein do javac
         - stage: test
           script: lein do clean, javac, test
+          after_script: bash -ex test/coveralls.sh
 notifications:
   recipients:
     - ido@appsflyer.com
