@@ -11,3 +11,8 @@ pom.xml.asc
 /.prepl-port
 .hgignore
 .hg/
+.classpath
+.clj-kondo
+.lsp
+.settings
+.project
