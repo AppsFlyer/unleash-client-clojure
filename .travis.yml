@@ -14,8 +14,8 @@ jobs:
           script: lein javac
         - stage: test
           script: lein do clean, javac, test
-          after_success:
-              - bash -ex test/coveralls.sh
+after_success:
+    - bash -ex test/coveralls.sh
 notifications:
   recipients:
     - ido@appsflyer.com
