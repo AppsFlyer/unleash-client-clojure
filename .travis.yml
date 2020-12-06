@@ -1,10 +1,21 @@
 dist: xenial
-sudo: required
 language: clojure
 lein: lein
-after_script:
-  - bash -ex test/coveralls.sh
-script: lein do clean, javac, test
+jdk:
+    - openjdk8
+    - openjdk11
+    - openjdk13
+    - openjdk15
+jobs: 
+    include:
+        - stage: lint
+          script: lein lint
+        - stage: build
+          script: lein javac
+        - stage: test
+          script: lein do clean, javac, test
+after_success:
+    - bash -ex test/coveralls.sh
 notifications:
   recipients:
     - ido@appsflyer.com
