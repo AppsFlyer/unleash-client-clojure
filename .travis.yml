@@ -1,6 +1,6 @@
 dist: xenial
 language: clojure
-lein: lein2
+lein: lein
 jdk:
     - openjdk8
     - openjdk11
