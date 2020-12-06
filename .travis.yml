@@ -6,7 +6,7 @@ jdk:
     - openjdk11
     - openjdk13
     - openjdk15
-jobs: 
+jobs:
     include:
         - stage: lint
           script: lein lint
