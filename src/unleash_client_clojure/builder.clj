@@ -3,21 +3,28 @@
            [no.finn.unleash.util UnleashConfig UnleashConfig$Builder UnleashScheduledExecutor]
            [no.finn.unleash.event UnleashSubscriber]))
 
-(defn build ^UnleashConfig 
-  [app-name ^String instance-id ^String api & fs]
-  (let [bldr
-        (-> (UnleashConfig$Builder.)
-            (.appName app-name)
-            (.instanceId instance-id)
-            (.unleashAPI api))]
+(defn build ^UnleashConfig [& fs]
+  (let [bldr (UnleashConfig$Builder.)]
     (.build ^UnleashConfig$Builder
             (reduce
               (fn
-                ([] bldr) 
+                ([] bldr)
                 ([bldr f]
                  (f bldr)))
               bldr
               fs))))
+
+(defn app-name [^String name]
+  (fn [^UnleashConfig$Builder bldr]
+    (.appName bldr name)))
+
+(defn instance-id [^String id]
+  (fn [^UnleashConfig$Builder bldr]
+    (.instanceId bldr id)))
+
+(defn unleash-api [^String api]
+  (fn [^UnleashConfig$Builder bldr]
+    (.unleashAPI bldr api)))
 
 (defn custom-http-header [header-name header-value]
   (fn [^UnleashConfig$Builder bldr]
