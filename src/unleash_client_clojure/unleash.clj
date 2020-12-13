@@ -53,11 +53,11 @@
     (vec (.getFeatureToggleNames this))))
 
 (defn build
-  [app-name ^String instance-id ^String api & fs]
-  (DefaultUnleash. (apply builder/build app-name instance-id api fs)
+  [& fs]
+  (DefaultUnleash. (apply builder/build fs)
                    (into-array Strategy [])))
 
 (defn build-with-custom-strategies
-  [app-name ^String instance-id ^String api strategies & fs]
-  (DefaultUnleash. (apply builder/build app-name instance-id api fs)
+  [strategies & fs]
+  (DefaultUnleash. (apply builder/build fs)
                    (into-array Strategy strategies)))
