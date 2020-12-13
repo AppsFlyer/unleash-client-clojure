@@ -3,13 +3,16 @@
 [![Clojars Project](https://img.shields.io/clojars/v/unleash-client-clojure.svg)](https://clojars.org/unleash-client-clojure)
 
 A Clojure library wrapping [unleash java client](https://github.com/Unleash/unleash-client-java)
+
 ## Usage
 
 ### Getting feature toggles
+
 ```clojure
-(require '[unleash-client-clojure.unleash :as u])
+(require '[unleash-client-clojure.unleash :as u]
+         '[unleash-client-clojure.builder :as b])
 ;; a simple client
-(def unleash (u/build "app-name" "instance-id" "http://unleash.herokuapp.com/api/"))
+(def unleash (u/build (b/app-name "app-name") (b/unleash-api "http://unleash.herokuapp.com/api/")))
 ;; simple toggle
 (u/enabled? unleash "Bit")
 ;; toggle with context
@@ -22,6 +25,7 @@ A Clojure library wrapping [unleash java client](https://github.com/Unleash/unle
 ```
 
 ### Variant support
+
 ```clojure
 (require '[unleash-client-clojure.variant :as v])
 (u/get-variant unleash "DemoVariantWithPayload")
@@ -33,16 +37,20 @@ A Clojure library wrapping [unleash java client](https://github.com/Unleash/unle
 ```
 
 ### Advanced client config
+
 ```clojure
 ;; the builder namespace supports passing builder confgurations as functions
 (require '[unleash-client-clojure.builder :as b])
-(def unleash (u/build "app-name" "instance-id" "http://unleash.herokuapp.com/api/" 
-             (b/environment "staging")
-             (b/fetch-toggles-interval 1)))
+(def unleash (u/build
+               (b/app-name "app-name")
+               (b/unleash-api "http://unleash.herokuapp.com/api/")
+               (b/environment "staging")
+               (b/fetch-toggles-interval 1)))
 ;; see the builder namespace for more available options
 ```
 
 ### Subscriber support
+
 ```clojure
 ;; one a subscriber can be pased to the client builder by passing
 (b/subscriber my-subscriber)
@@ -54,12 +62,13 @@ A Clojure library wrapping [unleash java client](https://github.com/Unleash/unle
 ;; any missing key defaults to no-op
 ;; this is a very noisy example:
 (def unleash
-    (u/build "app-name"
-             "instance-id" 
-             "http://unleash.herokuapp.com/api/"
-             (b/subscriber
-                (s/build {:on-event println})))
+  (u/build
+    (b/app-name "app-name")
+    (b/unleash-api "http://unleash.herokuapp.com/api/")
+    (b/subscriber
+      (s/build {:on-event println})))
 ```
 
 #### TODO:
+
 - [ ] Integration testing
