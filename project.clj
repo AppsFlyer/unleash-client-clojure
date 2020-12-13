@@ -5,7 +5,8 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[no.finn.unleash/unleash-client-java "3.3.3"]]
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.10.1"]
-                                  [clj-kondo "RELEASE"]]
+                                  [clj-kondo "RELEASE"]
+                                  [org.apache.logging.log4j/log4j-core "2.11.2"]]
                     :aliases      {"clj-kondo" ["run" "-m" "clj-kondo.main"]
                                    "lint"      ["run" "-m" "clj-kondo.main" "--lint" "src" "test"]}
                     :plugins     [[lein-ancient "0.6.15"]

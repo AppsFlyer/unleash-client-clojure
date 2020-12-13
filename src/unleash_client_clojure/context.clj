@@ -1,6 +1,5 @@
 (ns unleash-client-clojure.context
-  (:import [no.finn.unleash UnleashContext UnleashContext$Builder]
-           (java.util Optional)))
+  (:import [no.finn.unleash UnleashContext UnleashContext$Builder]))
 
 (defn build ^UnleashContext
   [& fs]
