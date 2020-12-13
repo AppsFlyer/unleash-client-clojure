@@ -9,14 +9,17 @@
 
 (deftest builder
   (testing "building unleash sets correct config"
-    (let [app-name "app" 
-          instance-id "some-instance" 
+    (let [app-name "app"
+          instance-id "some-instance"
           api "http://127.0.0.1"
-          backup-path (s/join File/separatorChar 
+          backup-path (s/join File/separatorChar
                               [(System/getProperty "java.io.tmpdir") (str (rand-int 100) ".json")])
           context (c/build (c/app-name "some-app"))
           subscriber (subscriber/build {})
-          config (b/build app-name instance-id api
+          config (b/build
+                   (b/app-name app-name)
+                   (b/instance-id instance-id)
+                   (b/unleash-api api)
                    (b/custom-http-header "header-name" "header-value")
                    (b/send-metrics-interval 42)
                    (b/fetch-toggles-interval 43)
@@ -26,12 +29,12 @@
                    (b/environment "staging")
                    (b/custom-http-header-provider
                      (reify CustomHttpHeadersProvider
-                        (getCustomHeaders [_] {"foo" "bar"})))
+                       (getCustomHeaders [_] {"foo" "bar"})))
                    (b/unleash-context-provider
                      (reify UnleashContextProvider
-                        (getContext [_] context)))
+                       (getContext [_] context)))
                    (b/subscriber subscriber))]
-                   
+
       (is (= {"header-name" "header-value"}
              (.getCustomHttpHeaders config)))
       (is (= 42
