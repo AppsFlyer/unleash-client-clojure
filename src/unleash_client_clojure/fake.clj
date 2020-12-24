@@ -19,18 +19,22 @@
      (if (fn? fallback)
        (.isEnabled this ^String toggle-name ^UnleashContext context (BiFunctionWrapper. fallback))
        (.isEnabled this ^String toggle-name ^UnleashContext context ^boolean fallback))))
+
   (get-variant
     ([this toggle-name]
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name)))
     ([this toggle-name default-variant]
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^Variant default-variant))))
+
   (get-variant-with-context
     ([this toggle-name context]
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context)))
     ([this toggle-name context default-variant]
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant))))
+
   (get-toggle-definition [this toggle-name]
     (throw (UnsupportedOperationException.)))
+
   (get-feature-toggle-names [this]
     (vec (.getFeatureToggleNames this))))
 

@@ -1,4 +1,4 @@
-(defproject unleash-client-clojure "0.2.0"
+(defproject unleash-client-clojure "0.3.0"
   :description "A Clojure library wrapping https://github.com/Unleash/unleash-client-java"
   :url "https://github.com/AppsFlyer/unleash-client-clojure"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
