@@ -1,6 +1,6 @@
 (ns unleash-client-clojure.fake
-  (:require [unleash-client-clojure.unleash :as u]
-            [unleash_client_clojure.util])
+  "Creating FakeUnleash instances that adhere to the IUnleash protocol."
+  (:require [unleash-client-clojure.unleash :as u])
   (:import [unleash_client_clojure.variant OptionalPayloadVariant]
            [no.finn.unleash FakeUnleash]
            [no.finn.unleash UnleashContext Variant]
@@ -38,5 +38,7 @@
   (get-feature-toggle-names [this]
     (vec (.getFeatureToggleNames this))))
 
-(defn build [] (FakeUnleash.))
-
+(defn build
+  "Returns an instance of FakeUnleash for unit test purposes."
+  []
+  (FakeUnleash.))

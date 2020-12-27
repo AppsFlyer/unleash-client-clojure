@@ -10,18 +10,22 @@
            [unleash_client_clojure.variant OptionalPayloadVariant]))
 
 (defprotocol IUnleash
+  "An abstraction of an Unleash client."
   (enabled?
     [this ^String toggle-name]
     [this ^String toggle-name fallback]
-    [this ^String toggle-name ^UnleashContext context fallback])
+    [this ^String toggle-name ^UnleashContext context fallback]
+    "Returns 'true' whether the toggle is enabled, 'false' otherwise. Can also provide a custom fallback option in case
+    the toggle isn't found via 'fallback', or a toggle evaluation context via 'context'.")
   (get-variant
     [this ^String toggle-name]
-    [this ^String toggle-name ^Variant default-variant])
+    [this ^String toggle-name ^Variant default-variant] "Returns the instance's variant, useful for unit tests.")
   (get-variant-with-context
     [this ^String toggle-name ^UnleashContext context]
-    [this ^String toggle-name ^UnleashContext context ^Variant default-variant])
-  (get-toggle-definition [this toggle-name])
-  (get-feature-toggle-names [this]))
+    [this ^String toggle-name ^UnleashContext context ^Variant default-variant]
+    "Returns the instance's variant while evaluating the supplied context, useful for unit tests.")
+  (get-toggle-definition [this toggle-name] "Returns a toggle's definition.")
+  (get-feature-toggle-names [this] "Returns a sequence of all the feature toggles' names known to this client."))
 
 (extend-protocol IUnleash
   DefaultUnleash
@@ -53,11 +57,15 @@
     (vec (.getFeatureToggleNames this))))
 
 (defn build
-  [& fs]
-  (DefaultUnleash. (apply builder/build fs)
+  "Expects to be applied with a variadic number of builder-setter functions.
+  Returns an instance of DefaultUnleash that supports AppsFlyer-specific strategies."
+  [& builder-param-setters]
+  (DefaultUnleash. (apply builder/build builder-param-setters)
                    (into-array Strategy [])))
 
 (defn build-with-custom-strategies
-  [strategies & fs]
-  (DefaultUnleash. (apply builder/build fs)
+  "Expects to be applied with a sequence of strategies and a variadic number of builder-setter functions.
+  Returns an instance of DefaultUnleash that supports the provided strategies."
+  [strategies & builder-param-setters]
+  (DefaultUnleash. (apply builder/build builder-param-setters)
                    (into-array Strategy strategies)))

@@ -5,7 +5,7 @@
 
 (defprotocol IVariant
   "A protocol to bridge the Java class no.finn.unleash.Variant into Clojure.
-  The class is used in unit tests to change the state of a FakeUnleash."
+  The class is used in unit tests to change the state of a FakeUnleash instance."
   (variant-enabled? [this] "Returns whether the variant is active or not.")
   (get-name [this] "Returns the variant's name.")
   (payload [this] "Returns the variant's payload, if it's present and the variant is enabled, otherwise returns nil.")
@@ -30,5 +30,3 @@
   (get-value [this]
     (when-let [payload ^Payload (.payload this)]
       (.getValue payload))))
-
-

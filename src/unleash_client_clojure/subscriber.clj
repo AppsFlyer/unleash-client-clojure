@@ -1,4 +1,5 @@
 (ns unleash-client-clojure.subscriber
+  "Create a Clojure wrapper over the UnleashSubscriber interface."
   (:import [no.finn.unleash.event UnleashSubscriber UnleashEvent UnleashReady ToggleEvaluated]
            [no.finn.unleash.repository FeatureToggleResponse ToggleCollection]
            [no.finn.unleash.metric ClientMetrics ClientRegistration]
