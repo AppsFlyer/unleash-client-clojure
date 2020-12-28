@@ -4,11 +4,13 @@
            [java.util Optional]))
 
 (defprotocol IVariant
-  (variant-enabled? [this])
-  (get-name [this])
-  (payload [this])
-  (get-type [this])
-  (get-value [this]))
+  "A protocol to bridge the Java class no.finn.unleash.Variant into Clojure.
+  The class is used in unit tests to change the state of a FakeUnleash instance."
+  (variant-enabled? [this] "Returns whether the variant is active or not.")
+  (get-name [this] "Returns the variant's name.")
+  (payload [this] "Returns the variant's payload, if it's present and the variant is enabled, otherwise returns nil.")
+  (get-type [this] "Returns the variant's type if it's present and the variant is enabled, otherwise returns nil.")
+  (get-value [this] "Returns the variant's value, if present, otherwise returns nil."))
 
 (deftype OptionalPayloadVariant [^Variant variant]
   IVariant
@@ -28,5 +30,3 @@
   (get-value [this]
     (when-let [payload ^Payload (.payload this)]
       (.getValue payload))))
-
-

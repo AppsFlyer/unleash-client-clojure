@@ -13,7 +13,7 @@ jobs:
         - stage: build
           script: lein javac
         - stage: test
-          script: lein do clean, javac, test
+          script: lein do clean, test
 after_success:
     - bash -ex test/coveralls.sh
 notifications:

@@ -5,14 +5,14 @@
 (deftest builder
   (testing "building unleash context sets correct config"
     (let [context (c/build
-                    (c/app-name "app") 
-                    (c/environment "env") 
-                    (c/user-id "userId") 
-                    (c/session-id "42") 
-                    (c/remote-address "1.2.2.1") 
-                    (c/add-property "foo" "bar") 
-                    (c/add-property "bar" "baz"))] 
-                   
+                    (c/app-name "app")
+                    (c/environment "env")
+                    (c/user-id "userId")
+                    (c/session-id "42")
+                    (c/remote-address "1.2.2.1")
+                    (c/add-property "foo" "bar")
+                    (c/add-property "bar" "baz"))]
+
       (is (= "app"
              (c/get-app-name context)))
       (is (= "env"

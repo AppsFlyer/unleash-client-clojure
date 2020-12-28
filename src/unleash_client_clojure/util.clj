@@ -5,4 +5,3 @@
   BiFunction
   (apply [_ toggle-name context]
     (f toggle-name context)))
-
