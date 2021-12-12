@@ -3,6 +3,7 @@
 [![Clojars Project](https://img.shields.io/clojars/v/unleash-client-clojure.svg)](https://clojars.org/unleash-client-clojure)
 [![Coverage Status](https://coveralls.io/repos/github/AppsFlyer/unleash-client-clojure/badge.svg?branch=master)](https://coveralls.io/github/AppsFlyer/unleash-client-clojure?branch=master)
 [![cljdoc badge](https://cljdoc.org/badge/unleash-client-clojure/unleash-client-clojure)](https://cljdoc.org/d/unleash-client-clojure/unleash-client-clojure/CURRENT)
+[![Build Status](https://img.shields.io/github/workflow/status/AppsFlyer/unleash-client-clojure/Push%20CI%20-%20master?event=push&branch=master&label=build%20%26%20test)](https://github.com/AppsFlyer/unleash-client-clojure/actions)  
 
 A Clojure library wrapping [unleash java client](https://github.com/Unleash/unleash-client-java)
 
