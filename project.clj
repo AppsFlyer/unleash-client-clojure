@@ -18,5 +18,6 @@
                    :aliases      {"clj-kondo" ["run" "-m" "clj-kondo.main"]
                                   "lint"      ["run" "-m" "clj-kondo.main" "--lint" "src" "test"]}
                    :plugins      [[lein-ancient "1.0.0-RC3"]
-                                  [lein-cloverage "1.2.2"]]
+                                  [lein-cloverage "1.2.2"]
+                                  [lein-eftest "0.5.9"]]
                    :global-vars  {*warn-on-reflection* true}}})
