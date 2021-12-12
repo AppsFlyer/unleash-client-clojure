@@ -35,7 +35,7 @@ jobs:
             echo "Version isn't a SNAPSHOT version:" $VERSION
             exit 0
           fi
-      - name: Lint
+      - name: lint
         run: lein lint
 
   test:
