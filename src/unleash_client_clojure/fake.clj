@@ -32,7 +32,7 @@
     ([this toggle-name context default-variant]
      (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant))))
 
-  (get-toggle-definition [this toggle-name]
+  (get-toggle-definition [_this _toggle-name]
     (throw (UnsupportedOperationException.)))
 
   (get-feature-toggle-names [this]
