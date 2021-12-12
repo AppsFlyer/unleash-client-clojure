@@ -36,12 +36,8 @@ jobs:
             echo "Version isn't a SNAPSHOT version:" $VERSION
             exit 0
           fi
-      - name: Lint
-        uses: DeLaGuardo/clojure-lint-action@v1
-        with:
-          clj-kondo-args: --lint src test --cache false
-          check-name: clj-kondo liniting report
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: lint
+        run: lein lint
 
   test:
     needs: build
