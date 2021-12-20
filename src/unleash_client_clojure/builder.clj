@@ -156,7 +156,7 @@
   (fn [^UnleashConfig$Builder builder]
     (.toggleBootstrapProvider builder toggle-bootstrap-provider)))
 
-(defn proxy
+(defn set-proxy
   ([^Proxy proxy]
    (fn [^UnleashConfig$Builder builder]
      (.proxy builder proxy)))

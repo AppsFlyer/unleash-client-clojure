@@ -47,7 +47,7 @@
   (more [this])
   (evaluate-all-toggles [this] 
                         [this context])
-  (count [this toggle-name variant-name])
+  (register-count [this toggle-name variant-name])
   (count-variant [this toggle-name variant-name]))
 
 (extend-protocol IUnleash
@@ -85,7 +85,7 @@
      (vec (.evaluateAllToggles (more this) ^UnleashContext context))))
   (get-feature-toggle-names [this]
     (vec (.getFeatureToggleNames (more this))))
-  (count [this toggle-name enabled?]
+  (register-count [this toggle-name enabled?]
     (.count (more this) toggle-name enabled?))
   (count-variant [this toggle-name variant-name]
     (.countVariant (more this) toggle-name variant-name)))
