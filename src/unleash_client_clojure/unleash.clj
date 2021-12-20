@@ -2,12 +2,30 @@
   (:require [unleash-client-clojure.builder :as builder]
             [unleash-client-clojure.util]
             [unleash_client_clojure.variant])
-  (:import [no.finn.unleash DefaultUnleash]
+  (:import [no.finn.unleash DefaultUnleash EvaluatedToggle]
            [no.finn.unleash.strategy Strategy]
            [no.finn.unleash UnleashContext Variant]
+           [no.finn.unleash.variant Payload]
            [java.util Optional]
-           [unleash_client_clojure.util BiFunctionWrapper]
-           [unleash_client_clojure.variant OptionalPayloadVariant]))
+           [unleash_client_clojure.util BiFunctionWrapper]))
+
+(defn payload->map [^Payload payload]
+  {:type (.getType payload)
+   :value (.getValue payload)})
+
+(defn variant->map [^Variant v]
+  (when v
+    {:name (.getName v)
+     :payload (let [payload ^Optional (.getPayload v)]
+                (when (.isPresent payload)
+                  (payload->map (.get payload))))
+     :enabled? (.isEnabled v)}))
+
+(defn evaluated-toggles->map [^EvaluatedToggle et]
+  (when et
+    {:enabled? (.isEnabled et)
+     :name (.getName et)
+     :variant (variant->map (.getVariant et))}))
 
 (defprotocol IUnleash
   "An abstraction of an Unleash client."
@@ -25,7 +43,12 @@
     [this ^String toggle-name ^UnleashContext context ^Variant default-variant]
     "Returns the instance's variant while evaluating the supplied context, useful for unit tests.")
   (get-toggle-definition [this toggle-name] "Returns a toggle's definition.")
-  (get-feature-toggle-names [this] "Returns a sequence of all the feature toggles' names known to this client."))
+  (get-feature-toggle-names [this] "Returns a sequence of all the feature toggles' names known to this client.")
+  (more [this])
+  (evaluate-all-toggles [this] 
+                        [this context])
+  (count [this toggle-name variant-name])
+  (count-variant [this toggle-name variant-name]))
 
 (extend-protocol IUnleash
   DefaultUnleash
@@ -42,19 +65,31 @@
        (.isEnabled this ^String toggle-name ^UnleashContext context ^boolean fallback))))
   (get-variant
     ([this toggle-name]
-     (OptionalPayloadVariant. (.getVariant this ^String toggle-name)))
+     (.getVariant this ^String toggle-name))
     ([this toggle-name default-variant]
-     (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^Variant default-variant))))
+     (.getVariant this ^String toggle-name ^Variant default-variant)))
   (get-variant-with-context
     ([this toggle-name context]
-     (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context)))
+     (.getVariant this ^String toggle-name ^UnleashContext context))
     ([this toggle-name context default-variant]
-     (OptionalPayloadVariant. (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant))))
+     (.getVariant this ^String toggle-name ^UnleashContext context ^Variant default-variant)))
   (get-toggle-definition [this toggle-name]
     (.orElse ^Optional (.getFeatureToggleDefinition this toggle-name)
              nil))
+  (more [this]
+    (.more this))
+  (evaluate-all-toggles 
+    ([this]
+     (vec (.evaluateAllToggles (more this))))
+    ([this context]
+     (vec (.evaluateAllToggles (more this) ^UnleashContext context))))
   (get-feature-toggle-names [this]
-    (vec (.getFeatureToggleNames this))))
+    (vec (.getFeatureToggleNames (more this))))
+  (count [this toggle-name enabled?]
+    (.count (more this) toggle-name enabled?))
+  (count-variant [this toggle-name variant-name]
+    (.countVariant (more this) toggle-name variant-name)))
+    
 
 (defn build
   "Expects to be applied with a variadic number of builder-setter functions.

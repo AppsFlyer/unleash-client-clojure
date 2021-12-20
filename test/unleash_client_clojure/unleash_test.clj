@@ -7,20 +7,20 @@
            [no.finn.unleash.variant Payload]))
 
 (deftest is-enabled
-  (let [fu (FakeUnleash.)]
+  (let [fake-unleash (FakeUnleash.)]
     (testing "enabled returns true"
-      (.enableAll fu)
-      (is (true? (u/enabled? fu "foo"))))
+      (.enableAll fake-unleash)
+      (is (true? (u/enabled? fake-unleash "foo"))))
     (testing "enabled returns false"
-      (.resetAll fu)
-      (is (false? (u/enabled? fu "foo"))))
+      (.resetAll fake-unleash)
+      (is (false? (u/enabled? fake-unleash "foo"))))
     (testing "enabled returns true/false"
-      (.enable fu (into-array String ["foo"]))
-      (is (true? (u/enabled? fu "foo")))
-      (.disable fu (into-array String ["foo"]))
-      (is (false? (u/enabled? fu "foo"))))
+      (.enable fake-unleash (into-array String ["foo"]))
+      (is (true? (u/enabled? fake-unleash "foo")))
+      (.disable fake-unleash (into-array String ["foo"]))
+      (is (false? (u/enabled? fake-unleash "foo"))))
     (testing "enabled returns false for unknwon"
-      (is (false? (u/enabled? fu "bar"))))))
+      (is (false? (u/enabled? fake-unleash "bar"))))))
 
 (deftest variants
   (let [fu (FakeUnleash.)]
