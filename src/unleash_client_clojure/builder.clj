@@ -2,7 +2,10 @@
   "Create and configure builders that build instances of UnleashConfig."
   (:import [no.finn.unleash CustomHttpHeadersProvider UnleashContextProvider]
            [no.finn.unleash.util UnleashConfig UnleashConfig$Builder UnleashScheduledExecutor]
-           [no.finn.unleash.event UnleashSubscriber]))
+           [no.finn.unleash.event UnleashSubscriber]
+           [no.finn.unleash.strategy Strategy]
+           [no.finn.unleash.repository ToggleBootstrapProvider]
+           [java.net Proxy]))
 
 (defn build
   "Expects to be applied with a variadic number of arguments, each of which is a function that expects an
@@ -140,3 +143,23 @@
   [^UnleashSubscriber subscriber]
   (fn [^UnleashConfig$Builder builder]
     (.subscriber builder subscriber)))
+
+(defn fallback-strategy
+  [^Strategy fallback-strategy]
+  (fn [^UnleashConfig$Builder builder]
+    (.fallbackStrategy builder fallback-strategy)))
+
+(defn 
+  toggle-bootstrap-provider
+  "Proxy has a sungle read() method that should return a Json of the form obtained by /api/client/features"
+  [^ToggleBootstrapProvider toggle-bootstrap-provider]
+  (fn [^UnleashConfig$Builder builder]
+    (.toggleBootstrapProvider builder toggle-bootstrap-provider)))
+
+(defn set-proxy
+  ([^Proxy proxy]
+   (fn [^UnleashConfig$Builder builder]
+     (.proxy builder proxy)))
+  ([^Proxy proxy ^String proxy-user ^String proxy-password]
+   (fn [^UnleashConfig$Builder builder]
+     (.proxy builder proxy proxy-user proxy-password))))
