@@ -4,11 +4,11 @@
             [unleash-client-clojure.context :as c]
             [unleash-client-clojure.subscriber :as subscriber]
             [clojure.string :as s])
-  (:import [java.io File]
-           [no.finn.unleash CustomHttpHeadersProvider UnleashContextProvider]
-           [no.finn.unleash.strategy DefaultStrategy] 
-           [no.finn.unleash.repository ToggleBootstrapProvider]
-           [java.net Proxy]))
+  (:import (java.io File)
+           (io.getunleash CustomHttpHeadersProvider UnleashContextProvider)
+           (io.getunleash.strategy DefaultStrategy)
+           (io.getunleash.repository ToggleBootstrapProvider)
+           (java.net Proxy)))
 
 (deftest builder
   (testing "building unleash sets correct config"

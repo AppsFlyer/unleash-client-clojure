@@ -1,9 +1,9 @@
 (ns unleash-client-clojure.subscriber
   "Create a Clojure wrapper over the UnleashSubscriber interface."
-  (:import [no.finn.unleash.event UnleashSubscriber UnleashEvent UnleashReady ToggleEvaluated]
-           [no.finn.unleash.repository FeatureToggleResponse ToggleCollection]
-           [no.finn.unleash.metric ClientMetrics ClientRegistration]
-           [no.finn.unleash UnleashException]))
+  (:import (io.getunleash.event UnleashSubscriber UnleashEvent UnleashReady ToggleEvaluated)
+           (io.getunleash.repository FeatureToggleResponse ToggleCollection)
+           (io.getunleash.metric ClientMetrics ClientRegistration)
+           (io.getunleash UnleashException)))
 
 (deftype Subscriber [on-error
                      on-event

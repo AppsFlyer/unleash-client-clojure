@@ -3,8 +3,8 @@
             [unleash-client-clojure.variant :as v]
             [unleash-client-clojure.fake]
             [clojure.test :refer [testing is deftest]])
-  (:import [no.finn.unleash FakeUnleash Variant]
-           [no.finn.unleash.variant Payload]))
+  (:import [io.getunleash FakeUnleash Variant]
+           [io.getunleash.variant Payload]))
 
 (deftest is-enabled
   (let [fake-unleash (FakeUnleash.)]

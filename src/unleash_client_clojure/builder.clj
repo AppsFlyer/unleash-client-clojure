@@ -1,11 +1,11 @@
 (ns unleash-client-clojure.builder
   "Create and configure builders that build instances of UnleashConfig."
-  (:import [no.finn.unleash CustomHttpHeadersProvider UnleashContextProvider]
-           [no.finn.unleash.util UnleashConfig UnleashConfig$Builder UnleashScheduledExecutor]
-           [no.finn.unleash.event UnleashSubscriber]
-           [no.finn.unleash.strategy Strategy]
-           [no.finn.unleash.repository ToggleBootstrapProvider]
-           [java.net Proxy]))
+  (:import (io.getunleash CustomHttpHeadersProvider UnleashContextProvider)
+           (io.getunleash.util UnleashConfig UnleashConfig$Builder UnleashScheduledExecutor)
+           (io.getunleash.event UnleashSubscriber)
+           (io.getunleash.strategy Strategy)
+           (io.getunleash.repository ToggleBootstrapProvider)
+           (java.net Proxy)))
 
 (defn build
   "Expects to be applied with a variadic number of arguments, each of which is a function that expects an

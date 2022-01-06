@@ -1,10 +1,10 @@
 (ns unleash-client-clojure.fake
   "Creating FakeUnleash instances that adhere to the IUnleash protocol."
   (:require [unleash-client-clojure.unleash :as u])
-  (:import [unleash_client_clojure.variant OptionalPayloadVariant]
-           [no.finn.unleash FakeUnleash]
-           [no.finn.unleash UnleashContext Variant]
-           [unleash_client_clojure.util BiFunctionWrapper]))
+  (:import (unleash_client_clojure.variant OptionalPayloadVariant)
+           (io.getunleash FakeUnleash)
+           (io.getunleash UnleashContext Variant)
+           (unleash_client_clojure.util BiFunctionWrapper)))
 
 (extend-protocol u/IUnleash
   FakeUnleash

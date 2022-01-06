@@ -1,6 +1,6 @@
 (ns unleash-client-clojure.context
   "Create and configure builders that build instances of UnleashContext."
-  (:import [no.finn.unleash UnleashContext UnleashContext$Builder]))
+  (:import (io.getunleash UnleashContext UnleashContext$Builder)))
 
 (defn build
   "Expects to be applied with a variadic number of arguments, each of which is a function that expects an

@@ -1,10 +1,10 @@
 (ns unleash-client-clojure.variant
-  (:import [no.finn.unleash.variant Payload]
-           [no.finn.unleash Variant]
-           [java.util Optional]))
+  (:import (io.getunleash.variant Payload)
+           (io.getunleash Variant)
+           (java.util Optional)))
 
 (defprotocol IVariant
-  "A protocol to bridge the Java class no.finn.unleash.Variant into Clojure.
+  "A protocol to bridge the Java class io.getunleash.Variant into Clojure.
   The class is used in unit tests to change the state of a FakeUnleash instance."
   (variant-enabled? [this] "Returns whether the variant is active or not.")
   (get-name [this] "Returns the variant's name.")

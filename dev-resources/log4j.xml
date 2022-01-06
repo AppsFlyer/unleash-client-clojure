@@ -10,11 +10,11 @@
 		</layout>
 	</appender>
 	<!-- Insert here your own base-package -->
-	<logger name="no.finn.unleash">
+	<logger name="io.getunleash">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 	</logger>
-	<logger name="no.finn.unleash.repository.ToggleBackupHandlerFile">
+	<logger name="io.getunleash.repository.ToggleBackupHandlerFile">
 		<level value="DEBUG" />
 		<appender-ref ref="CONSOLE" />
 	</logger>

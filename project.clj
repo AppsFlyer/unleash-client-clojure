@@ -11,11 +11,11 @@
                                       :username :env/clojars_username
                                       :password :env/clojars_password
                                       :sign-releases false}]]
-  :dependencies [[no.finn.unleash/unleash-client-java "4.4.1"]]
+  :dependencies [[io.getunleash/unleash-client-java "5.0.3"]]
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.10.3"]
                                   [clj-kondo "RELEASE"]
-                                  [org.apache.logging.log4j/log4j-core "2.17.0"]
-                                  [org.apache.logging.log4j/log4j-api "2.17.0"]
+                                  [org.apache.logging.log4j/log4j-core "2.17.1"]
+                                  [org.apache.logging.log4j/log4j-api "2.17.1"]
                                   [org.slf4j/slf4j-log4j12 "1.7.32"]]
                    :aliases      {"clj-kondo" ["run" "-m" "clj-kondo.main"]
                                   "lint"      ["run" "-m" "clj-kondo.main" "--lint" "src" "test"]}

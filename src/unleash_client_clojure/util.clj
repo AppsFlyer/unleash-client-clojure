@@ -1,5 +1,5 @@
 (ns unleash-client-clojure.util
-  (:import [java.util.function BiFunction]))
+  (:import (java.util.function BiFunction)))
 
 (deftype BiFunctionWrapper [f]
   BiFunction

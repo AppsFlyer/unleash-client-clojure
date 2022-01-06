@@ -2,12 +2,12 @@
   (:require [unleash-client-clojure.builder :as builder]
             [unleash-client-clojure.util]
             [unleash_client_clojure.variant])
-  (:import [no.finn.unleash DefaultUnleash EvaluatedToggle]
-           [no.finn.unleash.strategy Strategy]
-           [no.finn.unleash UnleashContext Variant]
-           [no.finn.unleash.variant Payload]
-           [java.util Optional]
-           [unleash_client_clojure.util BiFunctionWrapper]))
+  (:import (io.getunleash DefaultUnleash EvaluatedToggle)
+           (io.getunleash.strategy Strategy)
+           (io.getunleash UnleashContext Variant MoreOperations)
+           (io.getunleash.variant Payload)
+           (java.util Optional)
+           (unleash_client_clojure.util BiFunctionWrapper)))
 
 (defn payload->map [^Payload payload]
   {:type (.getType payload)
@@ -80,15 +80,15 @@
     (.more this))
   (evaluate-all-toggles 
     ([this]
-     (vec (.evaluateAllToggles (more this))))
+     (vec (.evaluateAllToggles ^MoreOperations (more this))))
     ([this context]
-     (vec (.evaluateAllToggles (more this) ^UnleashContext context))))
+     (vec (.evaluateAllToggles ^MoreOperations (more this) ^UnleashContext context))))
   (get-feature-toggle-names [this]
-    (vec (.getFeatureToggleNames (more this))))
+    (vec (.getFeatureToggleNames ^MoreOperations (more this))))
   (register-count [this toggle-name enabled?]
-    (.count (more this) toggle-name enabled?))
+    (.count ^MoreOperations (more this) toggle-name enabled?))
   (count-variant [this toggle-name variant-name]
-    (.countVariant (more this) toggle-name variant-name)))
+    (.countVariant ^MoreOperations (more this) toggle-name variant-name)))
     
 
 (defn build
